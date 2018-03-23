@@ -1,0 +1,10 @@
+server:
+    port: 8080
+
+spring:
+    datasource:
+        name: young-001
+        url: jdbc:mysql://139.108.184.27:3306/young
+        username: guest
+        password: Guest@001
+
