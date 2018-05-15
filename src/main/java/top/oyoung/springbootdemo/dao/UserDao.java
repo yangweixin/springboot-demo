@@ -15,10 +15,13 @@ public interface UserDao {
     @Select("select * from user where id=#{id}")
     public User getUserById(int id);
 
-    @Insert({"insert user (account,name,address) value(#{name}, #{name}, #{name})}"})
+    @Select("select * from user where username=#{name}")
+    public User getUserByName(String name);
+
+    @Insert({"insert user (account,username,address) value(#{name}, #{name}, #{name})}"})
     public int insertUser(String name);
 
-    @Insert("insert into user (account,name,address) value('sun','孙秘书','西安')")
+    @Insert("insert into user (account,username,address) value('sun','孙秘书','西安')")
     public void insert();
 
     @Update("update user set account='zhen' where id=2")

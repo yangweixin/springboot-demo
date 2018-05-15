@@ -48,6 +48,8 @@ properties.string:
   prefix: start
   subfix:  end
 
+management.endpoints.web.exposure.include: info, health,env
+
 
 
 
