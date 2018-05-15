@@ -1,8 +1,14 @@
 package top.oyoung.springbootdemo.entity;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @Method: top.oyoung.springmvc.entity
@@ -11,12 +17,16 @@ import java.io.Serializable;
  * @Date: 2018/3/26 10:11
  */
 @Alias("User")
-public class User implements Serializable{
+public class User implements Serializable,UserDetails {
 
     private int id ;
     private String account;
-    private String name;
+    private String username;
+    private String password;
     private String address;
+    private List<GrantedAuthority> authorities = new ArrayList<>();
+
+
 
     public int getId() {
         return id;
@@ -34,14 +44,6 @@ public class User implements Serializable{
         this.account = account;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -55,8 +57,56 @@ public class User implements Serializable{
         return "User{" +
                 "id=" + id +
                 ", account='" + account + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + username + '\'' +
                 ", address='" + address + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void addAuthorities(GrantedAuthority authoritie) {
+        this.authorities.add(authoritie);
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

@@ -32,4 +32,7 @@ public interface UserDao {
 
     @Select("select * from user")
     public List<Map<String, Object>> query();
+
+    @Select("select * from user where account=#{account}")
+    public User getUserByAccount(String account);
 }
