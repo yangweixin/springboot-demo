@@ -7,6 +7,7 @@ server:
 
 logging:
   path: logs/
+  level.root: debug
 
 spring:
   datasource:

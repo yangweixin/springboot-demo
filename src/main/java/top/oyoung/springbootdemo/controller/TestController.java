@@ -2,6 +2,8 @@ package top.oyoung.springbootdemo.controller;
 
 //import org.springframework.data.redis.core.RedisTemplate;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,10 +69,11 @@ public class TestController {
 //        return concatStrService.doConcat(content);
 //    }
 
-    @PreAuthorize("hasPermission(#key, 'k')")
-    @RequestMapping("3/{id}")
+    @PreAuthorize("hasPermission(#user, 'NOMAL')")
+//    @PostAuthorize("returnObject.account == 'y'")
+//    @RequestMapping("3/{id}")
     @ResponseBody
-    public User t3(String key, @PathVariable("id")int id){
+    public User t3(@Param("user") String user, @PathVariable("id")int id){
         return testService.getUserById(id);
     }
 
