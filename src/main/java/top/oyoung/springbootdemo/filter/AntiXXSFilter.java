@@ -21,5 +21,6 @@ public class AntiXXSFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         System.out.printf("hello ~~ i am filter");
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

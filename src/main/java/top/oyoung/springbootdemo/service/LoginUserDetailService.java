@@ -8,8 +8,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import top.oyoung.springbootdemo.Constants.Constants;
 import top.oyoung.springbootdemo.dao.UserDao;
 import top.oyoung.springbootdemo.entity.User;
+
+import javax.annotation.Resource;
 
 /**
  * @Author: Yang Weixin
@@ -19,14 +22,14 @@ import top.oyoung.springbootdemo.entity.User;
 @Service
 public class LoginUserDetailService implements UserDetailsService {
 
-    @Autowired
+    @Resource
     private UserDao userDao;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.getUserByAccount(username);
         if(user != null) {
-            user.addAuthorities(new SimpleGrantedAuthority("nomal"));
+            user.addAuthorities(new SimpleGrantedAuthority(Constants.SECURITY_ROLE_PREFIX + "NOMAL"));
         }
         return user;
     }
