@@ -2,39 +2,40 @@ package top.oyoung.springbootdemo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import top.oyoung.springbootdemo.Constants.Constants;
+import top.oyoung.springbootdemo.controller.TestController;
+import top.oyoung.springbootdemo.dao.UserDao;
 import top.oyoung.springbootdemo.entity.User;
 
 import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest( webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class TestDemo {
 
-//    @Resource
-//    private WebTestClient webClient;
-
-    @Resource
-    private TestRestTemplate restTemplate;
-
-//    @Test
-//    public void demoTest1(){
-//        Object returnOjb = this.webClient.
-//            get()
-//            .uri("/test/3/1")
-//            .exchange()
-//                .expectStatus().isOk()
-//                .expectBody(User.class)
-//                .returnResult();
-//
-//        System.out.println(returnOjb);
-//    }
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
-    public void demoTest2(){
-        this.restTemplate.getForEntity("/test/3/1",Object.class);
+    @WithUserDetails("ya")
+    public void demoTest2() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/test/3/1"))
+                .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 }

@@ -69,9 +69,9 @@ public class TestController {
 //        return concatStrService.doConcat(content);
 //    }
 
-    @PreAuthorize("hasPermission(#user, 'NOMAL')")
+    @PreAuthorize("hasRole('NOMAL')")
 //    @PostAuthorize("returnObject.account == 'y'")
-//    @RequestMapping("3/{id}")
+    @RequestMapping("3/{id}")
     @ResponseBody
     public User t3(@Param("user") String user, @PathVariable("id")int id){
         return testService.getUserById(id);
