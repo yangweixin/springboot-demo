@@ -3,14 +3,16 @@ package top.oyoung.springbootdemo.controller;
 //import org.springframework.data.redis.core.RedisTemplate;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.access.prepost.PostAuthorize;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import top.oyoung.springbootdemo.annotation.MyGate;
 import top.oyoung.springbootdemo.dao.UserDao;
 import top.oyoung.springbootdemo.entity.Person;
 import top.oyoung.springbootdemo.entity.User;
@@ -26,7 +28,8 @@ import java.util.ArrayList;
  * @Author: Yang Weixin
  * @Date: 2018/3/23 13:24
  */
-@Component
+@Controller
+@Validated
 @RequestMapping("/test")
 public class TestController {
 
@@ -98,4 +101,13 @@ public class TestController {
         return redisUtil.getValue(key).toString();
     }
 
+    @RequestMapping("/valid")
+    @ResponseBody
+    public String valid(
+        @Range
+        @MyGate(message = "必须数字哦",regexp = "\\d*")
+        String name
+    ){
+        return "name";
+    }
 }

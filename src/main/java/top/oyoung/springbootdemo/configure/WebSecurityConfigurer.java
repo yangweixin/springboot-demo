@@ -41,6 +41,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(antiXXSFilter, FilterSecurityInterceptor.class);
 
         http
+            .csrf()
+                .disable()
             .exceptionHandling()
 //                .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler)
@@ -51,8 +53,8 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
 //                .antMatchers(HttpMethod.GET,"/test/3/**").hasRole("NOMAL")
 //                .antMatchers(HttpMethod.POST, "/test/4/**").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated();
+                .antMatchers("/test/**").permitAll()
+                .anyRequest().authenticated();
     }
 
     @Override
