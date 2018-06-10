@@ -2,6 +2,8 @@ package top.oyoung.springbootdemo.controller;
 
 //import org.springframework.data.redis.core.RedisTemplate;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
  * @Author: Yang Weixin
  * @Date: 2018/3/23 13:24
  */
+@Api("test")
 @Controller
 @Validated
 @RequestMapping("/test")
@@ -50,6 +53,8 @@ public class TestController {
 //        System.out.println(person.toString());
 //        return DateUtil.getToday(DateUtil.DATE_FORMAT_SHORT);
 //    }
+
+    @ApiOperation("index")
     @RequestMapping("")
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView();
