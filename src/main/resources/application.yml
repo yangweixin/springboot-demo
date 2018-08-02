@@ -12,9 +12,13 @@ logging:
 spring:
   datasource:
     name: young-001
-    url: jdbc:mysql://39.108.184.27:3306/young
+    url: jdbc:mysql://39.108.184.27:3306/young?useSSL=false
     username: young
     password: Guest@Mysql@001
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 #################redis基础配置#################
   redis:

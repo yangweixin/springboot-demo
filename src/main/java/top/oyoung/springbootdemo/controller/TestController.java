@@ -4,8 +4,6 @@ package top.oyoung.springbootdemo.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Authorization;
-import org.apache.ibatis.annotations.Param;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import top.oyoung.springbootdemo.annotation.MyGate;
+import top.oyoung.springbootdemo.dao.PassportRepository;
+import top.oyoung.springbootdemo.dao.RoleRepository;
+import top.oyoung.springbootdemo.dao.TeacherRepository;
 import top.oyoung.springbootdemo.dao.UserDao;
 import top.oyoung.springbootdemo.entity.Person;
 import top.oyoung.springbootdemo.entity.User;
@@ -44,6 +45,19 @@ public class TestController {
     private RedisUtil redisUtil;
     @Resource
     private UserDao userDao;
+    private RoleRepository roleRepository;
+    private TeacherRepository teacherRepository;
+    private PassportRepository passportRepository;
+
+    public TestController(
+        RoleRepository roleRepository,
+        TeacherRepository teacherRepository,
+        PassportRepository passportRepository
+    ) {
+        this.roleRepository = roleRepository;
+        this.teacherRepository = teacherRepository;
+        this.passportRepository = passportRepository;
+    }
 
     @ApiOperation("index")
     @GetMapping("")
@@ -110,5 +124,11 @@ public class TestController {
         String name
     ){
         return "name";
+    }
+
+    @GetMapping("/jpa")
+    public void jpa(String name){
+
+
     }
 }
