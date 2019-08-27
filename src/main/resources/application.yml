@@ -11,10 +11,10 @@ logging:
 
 spring:
   datasource:
-    name: young-001
-    url: jdbc:mysql://39.108.184.27:3306/young?useSSL=false
-    username: young
-    password: Guest@Mysql@001
+    name: root
+    url: jdbc:mysql://localhost:3306/young?useSSL=false
+    username: root
+    password: 1234567890
   jpa:
     hibernate:
       ddl-auto: update
@@ -38,20 +38,6 @@ spring:
 
 mybatis:
   mapper-locations: classpath:top/oyoung/springbootdemo/mapper/*.xml
-
-top.oyoung:
-  enable: true
-  name: young
-  age: 11
-  address[0]: 北京
-  address[1]: 上海
-  address[2]: 广州
-  phone.number: 1111111
-
-properties.string:
-  enable: true
-  prefix: start
-  subfix:  end
 
 management.endpoints.web.exposure.include: info, health,env
 

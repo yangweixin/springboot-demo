@@ -15,7 +15,6 @@ import top.oyoung.springbootdemo.dao.PassportRepository;
 import top.oyoung.springbootdemo.dao.RoleRepository;
 import top.oyoung.springbootdemo.dao.TeacherRepository;
 import top.oyoung.springbootdemo.dao.UserDao;
-import top.oyoung.springbootdemo.entity.Person;
 import top.oyoung.springbootdemo.entity.User;
 import top.oyoung.springbootdemo.service.TestService;
 import top.oyoung.springbootdemo.tool.RedisUtil;
@@ -37,8 +36,6 @@ public class TestController {
 
     @Resource
     private TestService testService;
-    @Resource
-    private Person person;
 //    @Resource
 //    private ConcatStrService concatStrService;
     @Resource
